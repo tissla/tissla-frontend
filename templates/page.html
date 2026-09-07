@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="sv" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{if .Portfolio}}Portfolio · {{end}}tissla.org</title>
+    <meta
+      name="description"
+      data-i18n-content="siteDescription" content="{{t `siteDescription`}}"
+    />
+    <link rel="icon" href="/static/img/mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="{{asset `/static/style.css`}}" />
+    <script src="{{asset `/static/preferences.js`}}"></script>
+    <script src="{{asset `/static/app.js`}}" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">{{msg "skip"}}</a>
+    <header>
+      <div class="controls">
+        <label class="sr-only" for="language">{{msg "language"}}</label
+        ><select id="language">
+          {{range $code, $messages := .Languages}}<option value="{{$code}}">{{index $messages "languageName"}}</option>{{end}}</select
+        ><button
+          id="theme"
+          type="button"
+          data-i18n-aria="theme"
+          aria-label="{{t `theme`}}"
+        >
+          ◐</button
+        ><button id="auth-open">{{msg "login"}}</button
+        ><span id="user-name" hidden></span
+        ><button id="logout" hidden>{{msg "logout"}}</button>
+      </div>
+    </header>
+    <main id="main">
+      {{if .Portfolio}}
+      <section class="intro">
+        <a href="/" aria-label="{{t `home`}}" data-i18n-aria="home"><img src="/static/img/mark.svg" width="64" height="64" alt="Tissla"></a>
+        <h1>{{msg "portfolio"}}<span class="accent">.</span></h1>
+        <p>{{msg "intro"}}</p>
+      </section>
+      <div class="projects">
+        {{range .Items}}
+        <article class="project" id="{{.ID}}">
+          {{if .Images}}
+          <div class="gallery">
+            {{$title := .Title}}{{range .Images}}<a
+              href="{{.}}"
+              class="gallery-image"
+              data-gallery="{{$title}}"
+              ><img
+                src="{{.}}"
+                alt="{{$title}}"
+                loading="lazy"
+                width="640"
+                height="360" /></a
+            >{{end}}
+          </div>
+          {{end}}
+          <div class="project-body">
+            <h2>{{.Title}}</h2>
+            <p
+              class="description" data-translations="{{.Description.JSON}}"
+            >
+              {{.Description.Default}}
+            </p>
+            <ul class="tags">
+              {{range .Tags}}
+              <li>{{.}}</li>
+              {{end}}
+            </ul>
+            <div class="actions">
+              {{range .Actions}}<a
+                class="button"
+                href="{{.URL}}"
+                target="_blank"
+                rel="noopener noreferrer" data-translations="{{.Label.JSON}}"
+                >{{.Label.Default}}</a
+              >{{end}}
+            </div>
+            {{if .Repo}}
+            <div class="stats" data-repo="{{.Repo}}">
+              <p>{{msg "loading"}}</p>
+            </div>
+            {{end}}
+          </div>
+        </article>
+        {{end}}
+      </div>
+      {{else}}
+      <section class="intro home-intro">
+        <img
+          class="hero-mark"
+          src="/static/img/mark.svg"
+          alt="Tissla"
+          width="140"
+          height="140"
+        />
+      </section>
+      <div class="services" id="authenticated-services" hidden>
+        <a class="service" href="/jellyfin/" data-service="/jellyfin/"
+          ><img src="/static/img/jellyfin.png" alt="" width="90" height="90" />
+          <h2>Jellyfin</h2>
+          <span class="service-status">{{msg "open"}}</span
+          ><span aria-hidden="true"> ↗</span></a
+        >
+      </div>
+      <div class="portfolio-link">
+        <a class="button" href="/portfolio">{{msg "portfolio"}} →</a>
+      </div>
+      {{end}}
+      <noscript
+        ><p>{{msg "noscript"}}</p></noscript
+      >
+    </main>
+    <dialog id="auth-dialog" aria-labelledby="auth-title">
+      <button
+        class="close"
+        data-close
+        data-i18n-aria="close"
+        aria-label="{{t `close`}}"
+      >
+        ×
+      </button>
+      <h2 id="auth-title">{{msg "authTitle"}}</h2>
+      <p>{{msg "authIntro"}}</p>
+      <form id="phone-form">
+        <label for="phone">{{msg "phone"}}</label
+        ><input
+          id="phone"
+          type="tel"
+          autocomplete="tel"
+          placeholder="+46 70 123 45 67"
+          required
+          maxlength="32"
+        /><button class="primary">{{msg "send"}}</button>
+      </form>
+      <form id="code-form" hidden>
+        <label for="code">{{msg "code"}}</label
+        ><input
+          id="code"
+          inputmode="numeric"
+          autocomplete="one-time-code"
+          pattern="[0-9]{6}"
+          maxlength="6"
+          required
+        /><button class="primary">{{msg "verify"}}</button
+        ><button id="change-number" type="button">{{msg "back"}}</button>
+      </form>
+      <p id="auth-message" role="status" aria-live="polite"></p>
+    </dialog>
+    <dialog id="image-dialog" data-i18n-aria="gallery" aria-label="{{t `gallery`}}">
+      <button
+        class="close"
+        data-close
+        data-i18n-aria="close"
+        aria-label="{{t `close`}}"
+      >
+        ×</button
+      ><img id="viewer" alt="" />
+      <div class="viewer-controls">
+        <button id="previous">{{msg "previous"}}</button
+        ><span id="image-count"></span
+        ><button id="next">{{msg "next"}}</button>
+      </div>
+    </dialog>
+    <p id="notification" role="status" hidden></p>
+  </body>
+</html>

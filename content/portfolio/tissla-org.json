@@ -1,0 +1,22 @@
+{
+  "id": "tissla-org",
+  "order": 4,
+  "title": "tissla.org",
+  "description": {
+    "sv": "Min portfolio och ingången till mitt eget homelab. En Go-applikation serverar HTML, CSS och JavaScript. Kubernetes ingress skickar anrop till separata tjänster, med en egen verifieringstjänst för inloggning.",
+    "en": "My portfolio and the gateway to my self-hosted homelab. A Go application serves HTML, CSS and JavaScript. Kubernetes ingress routes requests to separate services, with a dedicated verification service for authentication."
+  },
+  "images": [
+    "/static/img/mark.svg"
+  ],
+  "tags": [
+    "Go",
+    "Kubernetes",
+    "DevOps",
+    "Microservices",
+    "JavaScript",
+    "Auth"
+  ],
+  "repo": "",
+  "actions": []
+}

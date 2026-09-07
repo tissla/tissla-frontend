@@ -1,0 +1,30 @@
+{
+  "id": "plcemulator",
+  "order": 3,
+  "title": "PLC Emulator",
+  "description": {
+    "sv": "Testa och validera PLC-styrning utan fysisk hårdvara.\n\n• Kommunikation via TCP/IP\n• Realtidssimulering av upp till 9 motorer\n• Visuell återkoppling för motorläge, position och status\n• Referenskörning, centrering och positionsstyrning\n• Skriptbara motorkonfigurationer\n• Ljust och mörkt tema",
+    "en": "Test and validate PLC control software without physical hardware.\n\n• TCP/IP communication\n• Real-time simulation of up to 9 motors\n• Visual motor state, position and status\n• Homing, centering and position control\n• Scriptable motor configurations\n• Dark and light themes"
+  },
+  "images": [],
+  "tags": [
+    ".NET",
+    "C#",
+    "WPF",
+    "TCP/IP",
+    "PLC",
+    "MVVM",
+    "Industrial Automation",
+    "Simulation"
+  ],
+  "repo": "",
+  "actions": [
+    {
+      "label": {
+        "sv": "Visa på GitHub",
+        "en": "View on GitHub"
+      },
+      "url": "https://github.com/ricsv-code/PlcEmulator"
+    }
+  ]
+}

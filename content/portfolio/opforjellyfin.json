@@ -1,0 +1,28 @@
+{
+  "id": "opforjellyfin",
+  "order": 0,
+  "title": "Opforjellyfin",
+  "description": {
+    "sv": "Ladda ner One Pace, hämta metadata och indexera ditt bibliotek med ett och samma verktyg.",
+    "en": "One Pace downloader, metadata fetcher, and indexer, baked into one convenient tool."
+  },
+  "images": [
+    "/static/img/opforjellyfin.png"
+  ],
+  "tags": [
+    "Go",
+    "CLI",
+    "Fang",
+    "Cross-platform"
+  ],
+  "repo": "tissla/opforjellyfin",
+  "actions": [
+    {
+      "label": {
+        "sv": "Visa på GitHub",
+        "en": "View on GitHub"
+      },
+      "url": "https://github.com/tissla/opforjellyfin"
+    }
+  ]
+}
