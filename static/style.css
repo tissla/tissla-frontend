@@ -39,6 +39,7 @@
   --subtext1: #bac2de;
   --text: #cdd6f4;
   --lavender: #b4befe;
+  --green: #a6e3a1;
   --accent: var(--lavender);
   --border: var(--surface2);
   --shadow: 0 16px 48px color-mix(in srgb, var(--crust) 25%, transparent);
@@ -63,6 +64,7 @@
   --subtext1: #b5bfe2;
   --text: #c6d0f5;
   --lavender: #babbf1;
+  --green: #a6d189;
 }
 
 * {
@@ -98,6 +100,7 @@ select,
 button:hover,
 .button:hover,
 select:hover {
+  background: color-mix(in srgb, var(--surface0) 60%, var(--accent) 40%);
   border-color: var(--accent);
 }
 
@@ -199,6 +202,7 @@ nav a[aria-current] {
 
 .icon-button:hover,
 .control-menu[open] > summary {
+  background: color-mix(in srgb, var(--surface0) 60%, var(--accent) 40%);
   border-color: var(--accent);
 }
 
@@ -320,10 +324,11 @@ h2 {
   transition:
     transform 0.2s,
     border-color 0.2s;
+    background-color 0.2s;
 }
 
 .service:hover {
-  transform: translateY(-4px);
+  background: color-mix(in srgb, var(--surface0) 80%, var(--accent) 20%);
   border-color: var(--accent);
 }
 
@@ -333,8 +338,23 @@ h2 {
 }
 
 .service-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
   font-size: 0.85rem;
   color: var(--subtext0);
+}
+
+.service-status::before {
+  content: "";
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: var(--overlay0);
+}
+
+.service-status[data-i18n="online"]::before {
+  background: var(--green);
 }
 
 .portfolio-link {

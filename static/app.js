@@ -372,9 +372,13 @@ async function serviceStatus(el) {
   try {
     const response = await fetch(el.dataset.service, {
       signal: AbortSignal.timeout(5000),
-      redirect: "error",
+      redirect: el.dataset.followRedirects === "true" ? "follow" : "error",
+      cache: "no-store",
     });
-    if (response.ok) key = "online";
+    const destination = new URL(response.url);
+    const service = new URL(el.getAttribute("href"), location.href);
+    if (response.ok && destination.origin === service.origin && destination.pathname.startsWith(service.pathname))
+      key = "online";
   } catch {}
   const label = el.querySelector(".service-status");
   label.dataset.i18n = key;

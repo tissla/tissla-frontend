@@ -32,8 +32,8 @@
   "next": "Nästa bild",
   "skip": "Till innehållet",
   "noscript": "Sidor och projekt fungerar utan JavaScript. Aktivera JavaScript för språkbyte, tema, bildgalleri och inloggning.",
-  "online": "Tillgänglig",
-  "offline": "Status okänd",
+  "online": "ONLINE",
+  "offline": "OFFLINE",
   "languageName": "Svenska",
   "gallery": "Bildgalleri",
   "siteDescription": "Tisslas portfolio. Projekt inom Go, appar och automation."

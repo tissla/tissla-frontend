@@ -32,8 +32,8 @@
   "next": "Next image",
   "skip": "Skip to content",
   "noscript": "Pages and projects work without JavaScript. Enable JavaScript for language switching, themes, the gallery and login.",
-  "online": "Available",
-  "offline": "Status unknown",
+  "online": "ONLINE",
+  "offline": "OFFLINE",
   "languageName": "English",
   "gallery": "Image gallery",
   "siteDescription": "Tissla’s portfolio. Projects in Go, apps and automation."

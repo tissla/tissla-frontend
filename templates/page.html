@@ -150,13 +150,19 @@
         <a class="service" href="/jellyfin/" data-service="/jellyfin/health"
           ><img src="/static/img/jellyfin.png" alt="" width="90" height="90" />
           <h2>Jellyfin</h2>
-          <span class="service-status">{{msg "open"}}</span
+          <span class="service-status" data-i18n="offline" aria-live="polite"
+            >{{msg "offline"}}</span
           ><span aria-hidden="true"> ↗</span></a
         >
-        <a class="service" href="/calibre/"
+        <a
+          class="service"
+          href="/calibre/"
+          data-service="/calibre/"
+          data-follow-redirects="true"
           ><img src="/static/img/calibre.svg" alt="" width="90" height="90" />
           <h2>Calibre</h2>
-          <span class="service-status">{{msg "open"}}</span
+          <span class="service-status" data-i18n="offline" aria-live="polite"
+            >{{msg "offline"}}</span
           ><span aria-hidden="true"> ↗</span></a
         >
       </div>

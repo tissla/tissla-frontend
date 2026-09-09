@@ -3,13 +3,10 @@
   "order": 1,
   "title": "mangaSpy",
   "description": {
-    "sv": "En app som bevakar nyheter och nya kapitel för din favoritmanga. Under utveckling.",
-    "en": "Manga tracking app. Tracks news and releases for your favorite manga! Work in progress."
+    "sv": "En app som bevakar nyheter och nya kapitel för din favoritmanga.",
+    "en": "Manga tracking app. Tracks news and releases for your favorite manga!"
   },
-  "images": [
-    "/static/img/output.gif",
-    "/static/img/output2.gif"
-  ],
+  "images": ["/static/img/output.gif", "/static/img/output2.gif"],
   "tags": [
     "React Native",
     "Zustand",
