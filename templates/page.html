@@ -6,7 +6,8 @@
     <title>{{if .Portfolio}}Portfolio · {{end}}tissla.org</title>
     <meta
       name="description"
-      data-i18n-content="siteDescription" content="{{t `siteDescription`}}"
+      data-i18n-content="siteDescription"
+      content="{{t `siteDescription`}}"
     />
     <link rel="icon" href="/static/img/mark.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="{{asset `/static/style.css`}}" />
@@ -17,25 +18,74 @@
     <a class="skip" href="#main">{{msg "skip"}}</a>
     <header>
       <div class="controls">
-        <label class="sr-only" for="language">{{msg "language"}}</label
-        ><select id="language">
-          {{range $code, $messages := .Languages}}<option value="{{$code}}">{{index $messages "languageName"}}</option>{{end}}</select
-        ><button
+        <details class="control-menu" id="language-menu">
+          <summary
+            class="icon-button"
+            data-i18n-aria="language"
+            aria-label="{{t `language`}}"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18Z" />
+            </svg>
+          </summary>
+          <div class="control-dropdown">
+            {{range $code, $messages := .Languages}}
+            <button
+              type="button"
+              data-language="{{$code}}"
+              lang="{{$code}}"
+              aria-pressed="false"
+            >
+              {{index $messages "languageName"}}
+            </button>
+            {{end}}
+          </div>
+        </details>
+        <button
           id="theme"
+          class="icon-button"
           type="button"
           data-i18n-aria="theme"
           aria-label="{{t `theme`}}"
         >
-          ◐</button
-        ><button id="auth-open">{{msg "login"}}</button
-        ><span id="user-name" hidden></span
-        ><button id="logout" hidden>{{msg "logout"}}</button>
+          ◐
+        </button>
+        <button
+          id="auth-open"
+          class="icon-button"
+          type="button"
+          data-i18n-aria="login"
+          aria-label="{{t `login`}}"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M14 3h6v18h-6M3 12h12m-4-4 4 4-4 4" />
+          </svg>
+        </button>
+        <details class="control-menu" id="account-menu" hidden>
+          <summary
+            class="icon-button"
+            data-i18n-aria="account"
+            aria-label="{{t `account`}}"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="10" cy="7" r="4" />
+              <path d="M3 21v-2a7 7 0 0 1 12-5m1 5 2 2 4-5" />
+            </svg>
+          </summary>
+          <div class="control-dropdown">
+            <span id="user-name"></span>
+            <button id="logout" type="button">{{msg "logout"}}</button>
+          </div>
+        </details>
       </div>
     </header>
     <main id="main">
       {{if .Portfolio}}
       <section class="intro">
-        <a href="/" aria-label="{{t `home`}}" data-i18n-aria="home"><img src="/static/img/mark.svg" width="64" height="64" alt="Tissla"></a>
+        <a href="/" aria-label="{{t `home`}}" data-i18n-aria="home"
+          ><img src="/static/img/mark.svg" width="64" height="64" alt="Tissla"
+        /></a>
         <h1>{{msg "portfolio"}}<span class="accent">.</span></h1>
         <p>{{msg "intro"}}</p>
       </section>
@@ -59,9 +109,7 @@
           {{end}}
           <div class="project-body">
             <h2>{{.Title}}</h2>
-            <p
-              class="description" data-translations="{{.Description.JSON}}"
-            >
+            <p class="description" data-translations="{{.Description.JSON}}">
               {{.Description.Default}}
             </p>
             <ul class="tags">
@@ -74,7 +122,8 @@
                 class="button"
                 href="{{.URL}}"
                 target="_blank"
-                rel="noopener noreferrer" data-translations="{{.Label.JSON}}"
+                rel="noopener noreferrer"
+                data-translations="{{.Label.JSON}}"
                 >{{.Label.Default}}</a
               >{{end}}
             </div>
@@ -98,9 +147,15 @@
         />
       </section>
       <div class="services" id="authenticated-services" hidden>
-        <a class="service" href="/jellyfin/" data-service="/jellyfin/"
+        <a class="service" href="/jellyfin/" data-service="/jellyfin/health"
           ><img src="/static/img/jellyfin.png" alt="" width="90" height="90" />
           <h2>Jellyfin</h2>
+          <span class="service-status">{{msg "open"}}</span
+          ><span aria-hidden="true"> ↗</span></a
+        >
+        <a class="service" href="/calibre/"
+          ><img src="/static/img/calibre.svg" alt="" width="90" height="90" />
+          <h2>Calibre</h2>
           <span class="service-status">{{msg "open"}}</span
           ><span aria-hidden="true"> ↗</span></a
         >
@@ -109,9 +164,7 @@
         <a class="button" href="/portfolio">{{msg "portfolio"}} →</a>
       </div>
       {{end}}
-      <noscript
-        ><p>{{msg "noscript"}}</p></noscript
-      >
+      <noscript><p>{{msg "noscript"}}</p></noscript>
     </main>
     <dialog id="auth-dialog" aria-labelledby="auth-title">
       <button
@@ -149,7 +202,11 @@
       </form>
       <p id="auth-message" role="status" aria-live="polite"></p>
     </dialog>
-    <dialog id="image-dialog" data-i18n-aria="gallery" aria-label="{{t `gallery`}}">
+    <dialog
+      id="image-dialog"
+      data-i18n-aria="gallery"
+      aria-label="{{t `gallery`}}"
+    >
       <button
         class="close"
         data-close
@@ -160,8 +217,7 @@
       ><img id="viewer" alt="" />
       <div class="viewer-controls">
         <button id="previous">{{msg "previous"}}</button
-        ><span id="image-count"></span
-        ><button id="next">{{msg "next"}}</button>
+        ><span id="image-count"></span><button id="next">{{msg "next"}}</button>
       </div>
     </dialog>
     <p id="notification" role="status" hidden></p>

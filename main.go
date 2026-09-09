@@ -37,45 +37,61 @@ type Item struct {
 
 func loadItems(dir string) ([]Item, error) {
 	paths, err := filepath.Glob(filepath.Join(dir, "*.json"))
+
 	if err != nil {
 		return nil, err
 	}
+
 	if len(paths) == 0 {
 		return nil, fmt.Errorf("no portfolio items in %s", dir)
 	}
+
 	items := make([]Item, 0, len(paths))
+
 	seen := map[string]bool{}
+
 	for _, path := range paths {
+
 		data, err := os.ReadFile(path)
+
 		if err != nil {
 			return nil, err
 		}
+
 		var item Item
+
 		dec := json.NewDecoder(bytes.NewReader(data))
 		dec.DisallowUnknownFields()
 		if err := dec.Decode(&item); err != nil {
 			return nil, fmt.Errorf("%s: %w", path, err)
 		}
+
 		var extra any
+
 		if dec.Decode(&extra) != io.EOF {
 			return nil, fmt.Errorf("%s: trailing JSON", path)
 		}
+
 		if item.ID == "" || item.Title == "" || item.Description.Default() == "" || seen[item.ID] {
 			return nil, fmt.Errorf("%s: missing fields or duplicate id", path)
 		}
+
 		seen[item.ID] = true
+
 		for _, a := range item.Actions {
 			u, e := url.Parse(a.URL)
 			if e != nil || u.Scheme != "https" || u.Host == "" || a.Label.Default() == "" {
 				return nil, fmt.Errorf("%s: invalid action", path)
 			}
 		}
+
 		if item.Repo != "" {
 			parts := strings.Split(item.Repo, "/")
 			if len(parts) != 2 || parts[0] == "" || parts[1] == "" || strings.ContainsAny(item.Repo, "?#% ") {
 				return nil, fmt.Errorf("%s: invalid repo", path)
 			}
 		}
+
 		for _, img := range item.Images {
 			if !strings.HasPrefix(img, "/static/img/") || strings.Contains(img, "..") {
 				return nil, fmt.Errorf("%s: invalid image", path)
@@ -84,30 +100,39 @@ func loadItems(dir string) ([]Item, error) {
 				return nil, fmt.Errorf("%s: %w", path, err)
 			}
 		}
+
 		items = append(items, item)
 	}
+
 	sort.Slice(items, func(i, j int) bool {
 		if items[i].Order == items[j].Order {
 			return items[i].ID < items[j].ID
 		}
 		return items[i].Order < items[j].Order
 	})
+
 	return items, nil
 }
 
 func newHandler(verifier string, client *http.Client, contentDir string) (http.Handler, error) {
+
 	target, err := url.Parse(verifier)
+
 	if err != nil || target.Host == "" || (target.Scheme != "http" && target.Scheme != "https") || target.User != nil || target.RawQuery != "" || target.Fragment != "" {
 		return nil, fmt.Errorf("invalid VERIFIER_URL")
 	}
+
 	items, err := loadItems(contentDir)
 	if err != nil {
 		return nil, err
 	}
+
 	catalog, err := loadCatalog("static/locales")
+
 	if err != nil {
 		return nil, err
 	}
+
 	funcs := catalog.templateFuncs()
 	funcs["asset"] = func(path string) (string, error) {
 		data, err := os.ReadFile(strings.TrimPrefix(path, "/"))
