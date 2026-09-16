@@ -1,0 +1,13 @@
+{
+  "id": "tissla-verifier",
+  "order": 5,
+  "title": "tissla-verifier",
+  "description": {
+    "sv": "Autentisering för mitt homelab, skriven i Go. Hanterar inloggning med engångskoder via löskopplat delivery-system (nuvarande implementation använder WhatsApp) och sessioner i SQLite. Integrerad med Traefik ForwardAuth för att skydda tjänster bakom samma ingång.",
+    "en": "Authentication for my homelab, written in Go. Handles login with one-time codes via a decoupled delivery system (current implementation uses WhatsApp) and sessions stored in SQLite. Integrates with Traefik ForwardAuth to protect services behind a shared entrypoint."
+  },
+  "images": ["/static/img/tissla-verifier.png"],
+  "tags": ["Go", "SQLite", "Traefik", "Authentication", "OTP"],
+  "repo": "",
+  "actions": []
+}

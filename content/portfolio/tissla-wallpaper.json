@@ -1,0 +1,29 @@
+{
+  "id": "tissla-wallpaper",
+  "order": 6,
+  "title": "tissla-wallpaper",
+  "description": {
+    "sv": "En resurssnål wallpaper-daemon för Wayland, skriven i Go. Kommunicerar direkt med en Wayland-server via delat minne (SHM), med handskriven protokollhantering baserad på Waylands XML-specifikationer, ingen kodgenerator använd.",
+    "en": "A resource-efficient wallpaper daemon for Wayland, written in Go. Communicates directly with a Wayland-server using shared memory (SHM), with handwritten protocol handling based on the Wayland XML specifications, no code generator used."
+  },
+  "images": ["/static/img/tissla-wallpaper.png"],
+  "tags": [
+    "Go",
+    "Wayland",
+    "Linux",
+    "Wallpaper",
+    "Systems Programming",
+    "Shared Memory",
+    "IPC"
+  ],
+  "repo": "tissla/tissla-wallpaper",
+  "actions": [
+    {
+      "label": {
+        "sv": "Visa på GitHub",
+        "en": "View on GitHub"
+      },
+      "url": "https://github.com/tissla/tissla-wallpaper"
+    }
+  ]
+}
