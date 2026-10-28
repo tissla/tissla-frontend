@@ -1,0 +1,15 @@
+when:
+  - event: [push, manual]
+    branch: main
+
+steps:
+  - name: build-and-push
+    image: woodpeckerci/plugin-kaniko
+    settings:
+      registry: nyx.home:30500
+      repo: tissla-frontend
+      dockerfile: Dockerfile
+      tags:
+       - latest
+       - ${CI_COMMIT_SHA}
+      insecure: true

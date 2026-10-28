@@ -1,4 +1,3 @@
 old/
-Dockerfile
 *test.go
 *.md
